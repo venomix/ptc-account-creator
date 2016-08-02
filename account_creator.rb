@@ -168,6 +168,7 @@ def create_account(username, password)
 end
 
 # puts "Enter accounts count: "
+# times = gets.chomp
 times = 10
 counter = 0
 try_count = 0
