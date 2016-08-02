@@ -21,7 +21,7 @@ def parse_cookies(all_cookies)
     cookies
 end
 
-def create_account
+def create_account(username, password)
 
 	# Setup HTTPClient
 	httpclient = HTTPClient.new
@@ -57,8 +57,8 @@ def create_account
 	final_signup_form_response = httpclient.get(final_signup_url)
 
 	o = [('a'..'z'), ('A'..'Z')].map { |i| i.to_a }.flatten
-	username = (0...12).map { o[rand(o.length)] }.join
-	password = (0...12).map { o[rand(o.length)] }.join
+	# username = (0...12).map { o[rand(o.length)] }.join
+	# password = (0...12).map { o[rand(o.length)] }.join
 	email = "#{username.downcase}@divismail.ru"
 	md5_email = Digest::MD5.hexdigest(email)
 
@@ -167,13 +167,20 @@ def create_account
 	end
 end
 
+# puts "Enter accounts count: "
 times = 10
 counter = 0
 try_count = 0
+name = ""
+puts "Enter pre name: "
+prename = gets.chomp
+puts "Enter password: "
+password = gets.chomp
 puts "PTC Account Creator Started"
 while(counter < times)
 	begin
-		create_account
+		name = "#{prename}#{counter}"
+		create_account(name, password)
 		counter += 1
 		puts "[Try: #{try_count}] #{counter} Accounts created"
 		try_count += 1
